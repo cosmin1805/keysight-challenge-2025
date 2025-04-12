@@ -418,11 +418,17 @@ int main() {
 	// --------------------------
 	// 6) Build the graph edges
 	// --------------------------
+	tbb::flow::broadcast_node<PacketBurst> broadcast_ipv4(g);
+
 	tbb::flow::make_edge(in_node, inspect_packet_node);
 
 	// We only run count_stats + routing + send on the IPv4 path
-	tbb::flow::make_edge(tbb::flow::output_port<0>(inspect_packet_node), count_stats);
-	tbb::flow::make_edge(count_stats, routing_node);
+	tbb::flow::make_edge(tbb::flow::output_port<0>(inspect_packet_node), broadcast_ipv4);
+	tbb::flow::make_edge(tbb::flow::output_port<1>(inspect_packet_node), count_stats);
+
+	tbb::flow::make_edge(broadcast_ipv4, routing_node);
+	tbb::flow::make_edge(broadcast_ipv4, count_stats);
+
 	tbb::flow::make_edge(routing_node, send_node);
 
 	// Activate input node

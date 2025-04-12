@@ -16,6 +16,8 @@ Pentru rularea proiectului trebuie modificata linia 137 cu calea absoluta a fisi
 
 Asigură ieșirea pachetelor procesate către rețea (pe interfața specificată, de exemplu "eth0", se afla la linia 400).
 
+De asemenea cand am ajuns acasa am observat o mica greseala si anume am legat prost edgurile intre noduri si am modificat adaugand si un brodcast edge. Implementarea fara aceasta schimbare sea afla in `gpu-router-old.cpp`.
+
 # Procesare și Trimitere Pachete cu SYCL/DPC++ și TBB
 
 Acest proiect este o aplicație C++ care combină mai multe tehnologii pentru a procesa pachetele de rețea. Codul folosește:
